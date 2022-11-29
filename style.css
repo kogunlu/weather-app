@@ -1,0 +1,20 @@
+nav {
+    background-color: #dfe0e0;
+}
+
+.nav-text-color{
+    color: #1b5d93
+}
+
+.nav-text{
+    font-size: xx-large;
+}
+
+.nav-text-child{
+    font-size: large;
+    color: #92a594;
+}
+
+.nav-button-color{
+    background-color: #1b5d93;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Weather-app</title>
+</head>
+<body class="h-full w-full flex flex-col bg-zinc-50">
+
+    <!-- Header -->
+    <nav class="w-full flex flex-col items-center">
+
+        <!-- Logo -->
+        <div class="flex w-full flex-row items-center justify-center lg:flex-row lg:items-center lg:justify-start">
+            <img src="/images/app-logo-removebg-preview.png" alt="app-logo" width="50em" class="w-4/12">
+           <div>
+            <p class="font-bold first-line:uppercase first-line:tracking-widest
+            first-letter:text-6xl first-letter:font-bold
+            first-letter:mr-0 first-letter:float-left text-xl nav-text-color ">Weather-App <br><span id="city-name-span" class="nav-text-child font-medium underline underline-offset-2"></span></p>
+           </div>
+        </div>
+
+        <!-- Search bar -->
+        <div class="flex w-11/12 justify-center items-center pt-2 pb-5">
+
+         <input id="search-bar" type="search" name="q" class="w-11/12 h-8 py-2 text-sm text-white bg-zinc-100 rounded-l-md pl-5 focus:outline-none focus:bg-white focus:text-gray-900" placeholder="Search by city name or postal code.." autocomplete="off">
+
+            <button id="submitBtn" type="submit" class="pl-1 w-1/12 focus:outline-none focus:shadow-outline bg-zinc-100 rounded-r-md">
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-8"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              </button>
+
+        </div>
+
+        <!-- Forecast selection (day-week-10 days etc) -->
+            <div id="details-btn" class="flex flex-col justify-center items-center nav-text-color mb-1">
+                <button class="flex items-center justify-center">
+                    <svg class="fill-current w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+                </button>
+            </div>
+            <div id="selectionBar" class="w-full flex flex-row justify-around items-center nav-button-color h-8" style="display: none ;">
+                <button class="pl-1 pr-1 hover:border-b-2 hover:border-b-slate-400 text-slate-300 focus:border-b-slate-200">Today</button>
+                <button class="pl-1 pr-1 hover:border-b-2 hover:border-b-slate-400 text-slate-300 focus:border-b-slate-200 ">Hourly</button>
+                <button class="pl-1 pr-1 hover:border-b-2 hover:border-b-slate-400 text-slate-300 focus:border-b-slate-200 ">10-days</button>
+            </div>
+            
+    
+    </nav>
+    
+    <!-- Main body -->
+
+    <main class="h-96">
+        <div id="main-div-1" class="w-10/12 h-full flex flex-col justify-center items-center">
+
+        </div>
+    </main>
+
+
+    <footer class="w-full flex flex-col items-center gap-2 mt-5">
+        <!-- Coperight part -->
+        <div class="w-full flex flex-col items-center justify-center border-b-2 border-slate-400 text-center p-1">
+            <p>
+                This website is protected by International copyright laws. Reproduction and usage without written permission is prohibited.
+            </p>
+            <p> <strong>© All Rights Reserved - 2022</strong> 
+    
+            </p>
+    
+        </div>
+        <!-- Credit part -->
+        <div class="flex flex-col w-5/6 items-center justify-center  md:flex-row md:w-full md:items-start
+         md:justify-center gap-2">
+                <!-- Brief info about project -->
+            <div class="w-full md:w-4/6 flex flex-col items-center justify-start text-center gap-1 p-1">
+                <p class="font-bold text-xl">
+                    About the project
+                </p>
+                <p class="p-1">
+                   <span class="nav-text-color font-bold"> Weather App</span> is a website created by using AccuWeather API</p>
+                 
+                
+            </div>
+    
+                <!-- Github accounts of developers -->
+            <div class="flex flex-col items-center gap-1 justify-center w-3/6 lg:w-2/6 pb-2">
+                <p class="font-bold text-xl">
+                    Created by
+                </p>
+               
+    
+                <!-- Kuday -->
+                <div class="w-full md:w-3/6">
+                    <a href="https://github.com/kogunlu" target="_blank" class="flex flex-row items-center justify-center gap-2">
+                        <img class="h-6" src="./images/GitHub-Mark-120px-plus.png" alt="Github-logo">
+                        <p>kogunlu</p>
+                    </a>
+                </div>
+    
+            </div>
+        </div>
+    </footer>
+
+    <script src="/index.js"></script>    
+</body>
+</html>
