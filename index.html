@@ -16,47 +16,52 @@
 
     <main class="h-screen w-full flex flex-col ">
     <!-- Header -->
-<nav class="w-full flex flex-col items-center">
+<nav class="w-full flex flex-col items-center justify-center md:h-1.5/6 lg:h-0.5/6 lg:justify-start">
+    <!-- Header-top -->
+    <div class="w-full flex flex-col items-center justify-center lg:flex-row">
+        <!-- Logo -->
+        <div class="flex w-full flex-row items-center justify-center lg:w-3/12">
+            <img id="logo" src="/images/app-logo-removebg-preview.png" alt="app-logo" class="w-4/12 md:w-2/12 lg:w-3/12">
+        <div class="flex items-center justify-center lg:w-9/12">
+            <p class="font-bold first-line:uppercase first-line:tracking-widest
+            first-letter:text-6xl lg:first-letter:text-5xl 2xl:first-letter:text-6xl first-letter:font-bold first-letter:mr-0 first-letter:float-left text-xl nav-text-color lg:text-sm 2xl:text-xl ">Weather-App <br><span id="city-name-span" class="nav-text-child font-medium underline underline-offset-2 lg:text-sm">Adana, Türkiye</span></p>
+        </div>
+        </div>
 
-    <!-- Logo -->
-    <div class="flex w-full flex-row items-center justify-center lg:flex-row lg:items-center lg:justify-start">
-        <img id="logo" src="/images/app-logo-removebg-preview.png" alt="app-logo" width="50em" class="w-4/12">
-       <div>
-        <p class="font-bold first-line:uppercase first-line:tracking-widest
-        first-letter:text-6xl first-letter:font-bold
-        first-letter:mr-0 first-letter:float-left text-xl nav-text-color ">Weather-App <br><span id="city-name-span" class="nav-text-child font-medium underline underline-offset-2"></span></p>
-       </div>
+    
+         <!-- Search bar -->
+        <div class="flex w-11/12 justify-center items-center pt-2 pb-5 lg:w-6/12 md:h-2/6 lg:pr-2">
+
+            <input id="search-bar" type="search" name="q" class="w-11/12 h-8 md:h-6 py-2 text-sm text-white bg-zinc-100 rounded-l-md pl-5 focus:outline-none focus:bg-white focus:text-gray-900" placeholder="Search by city name..." autocomplete="off">
+    
+            <button id="submitBtn" type="submit" class="pl-1 w-1/12 focus:outline-none focus:shadow-outline bg-zinc-100 rounded-r-md">
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-8 md:h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </button>
+    
+        </div>
     </div>
 
-    <!-- Search bar -->
-    <div class="flex w-11/12 justify-center items-center pt-2 pb-5">
-
-     <input id="search-bar" type="search" name="q" class="w-11/12 h-8 py-2 text-sm text-white bg-zinc-100 rounded-l-md pl-5 focus:outline-none focus:bg-white focus:text-gray-900" placeholder="Search by city name or postal code.." autocomplete="off">
-
-        <button id="submitBtn" type="submit" class="pl-1 w-1/12 focus:outline-none focus:shadow-outline bg-zinc-100 rounded-r-md">
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-8"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-          </button>
-
-    </div>
-
-    <!-- Forecast selection (day-week-10 days etc) -->
-        <div id="details-btn" class="flex flex-col justify-center items-center nav-text-color mb-1">
-            <button class="flex items-center justify-center hover:cursor-s-resize">
-                <svg class="fill-current w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
-            </button>
+    <!-- Header bottom 
+        Forecast selection (day-week-10 days etc) -->
+        <div class="w-full">
+            <div id="details-btn" class="flex w-full flex-col justify-center items-center nav-text-color mb-1 md:h-2/6 lg:hidden " >
+                <button class="flex items-center justify-center hover:cursor-s-resize">
+                    <svg class="fill-current w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+                </button>
+            </div>
+            <div id="selectionBar" class="w-full flex flex-row justify-around items-center nav-button-color h-8 hidden lg:flex" >
+                <button class="pl-1 pr-1 hover:border-b-2 hover:border-b-slate-400 text-slate-300 focus:border-b-slate-200" id="today">Today</button>
+                <button class="pl-1 pr-1 hover:border-b-2 hover:border-b-slate-400 text-slate-300 focus:border-b-slate-200 " id="fiveDays">5-days</button>
+            </div>
         </div>
-        <div id="selectionBar" class="w-full flex flex-row justify-around items-center nav-button-color h-8" style="display: none ;">
-            <button class="pl-1 pr-1 hover:border-b-2 hover:border-b-slate-400 text-slate-300 focus:border-b-slate-200">Today</button>
-            <button class="pl-1 pr-1 hover:border-b-2 hover:border-b-slate-400 text-slate-300 focus:border-b-slate-200 ">Hourly</button>
-            <button class="pl-1 pr-1 hover:border-b-2 hover:border-b-slate-400 text-slate-300 focus:border-b-slate-200 ">10-days</button>
-        </div>
+        
         
 
 </nav>
 
     <!-- Main body -->
 
-    <section class="h-full flex flex-col items-center justify-center bg-[url('./images/istanbul.jpeg')] opacity-90">
+    <section id="main-body" class="h-full flex flex-col items-center justify-center bg-[url('./images/istanbul.jpeg')] opacity-90 bg-contain ">
         <div id="main-div-1">
 
                 </div>

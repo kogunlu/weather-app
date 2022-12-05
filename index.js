@@ -7,6 +7,9 @@ const selectionBar = document.querySelector('#selectionBar')
 const detailsBtn = document.querySelector('#details-btn')
 const mainDiv = document.querySelector('#main-div-1')
 const logo = document.querySelector('#logo')
+const mainBody = document.querySelector('#main-body')
+const fiveDaysBtn = document.querySelector('#fiveDays')
+const todayBtn = document.querySelector('#today')
 
 
 // For initial screen
@@ -113,7 +116,7 @@ function findRelatedIcon(number){
 }
 
 // --------------------------------------------------------------------------
-//Fetching current wheather for given city
+//Fetching current weather for given city
 
 function fetchCurrentWeather(cityName){
     fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${cityName}&details=true`)
@@ -146,14 +149,11 @@ function fetchCurrentWeather(cityName){
 }
 
 // --------------------------------------------------------------------------
-// Rendering incoming data for current status
+// Rendering coming data for current status
 function showCurrentWeather(data){
     
    const selectedIcon = findRelatedIcon(data.WeatherIcon)
 
-    console.log(data)
-    console.log(data.WeatherIcon)
-    console.log(selectedIcon)
 
     if(mainDiv.innerHTML !== ""){
         mainDiv.innerHTML = ""
@@ -172,6 +172,7 @@ function showCurrentWeather(data){
         const statusDiv = document.createElement('div')
 
     const singleCardDivTop = document.createElement('div')
+        singleCardDivTop.id = "singleTop"
         singleCardDivTop.classList = "h-3/6 w-full flex flex-col justify-start items-center"    
 
     const singleCardDate = document.createElement('p')
@@ -218,8 +219,6 @@ function showCurrentWeather(data){
     singleCardTime.classList = "font-light italic "
     singleCardText.classList = "font-semibold"        
     singleCardTempature.classList = "font-bold"    
-
-    
 
 
 }           
@@ -1553,7 +1552,6 @@ function showFollowingDaysWeather(followingDaysData){
     const data = followingDaysData.DailyForecasts
     const cardDiv = document.querySelector("#singleDayCard")
 
-    console.log(data)
 
     const followingDaysDiv = document.createElement('div')
     const followingDaysTextDiv = document.createElement('div')
@@ -1609,7 +1607,7 @@ function showFollowingDaysWeather(followingDaysData){
                 followingDayDate.textContent = "Tomorrow"
             }
         followingDayDate.style.fontSize = "1em"
-        followingDayDate.classList = "text-center underline font-medium"
+        followingDayDate.classList = "text-center underline font-bold"
 
         followingDayDateDiv.appendChild(followingDayDate)
             followingDayDateDiv.classList = "w-full flex items-center justify-center"
@@ -1619,13 +1617,14 @@ function showFollowingDaysWeather(followingDaysData){
         
 
         const followingDayImg = document.createElement('i')
-            followingDayImg.classList = `${selectedIcon} pe-3x`
+            followingDayImg.classList = `${selectedIcon} pe-3x font-bold`
                 followingDaySpan.appendChild(followingDayImg)
 
         const followingDayTemperature = document.createElement('p')
         const weatherValue = Math.round(data[i].Temperature.Maximum.Value)
         const weatherValueMin = Math.round(data[i].Temperature.Minimum.Value)
             followingDayTemperature.textContent = `${weatherValue} °${data[i].Temperature.Maximum.Unit} / ${weatherValueMin} °${data[i].Temperature.Minimum.Unit} `
+            followingDayTemperature.classList = "font-semibold"
                 followingDaySpan.appendChild(followingDayTemperature)  
                 
                 followingDaySpan.classList = "flex flex-col items-center justify-center"    
@@ -1643,6 +1642,7 @@ function showFollowingDaysWeather(followingDaysData){
     
 
     followingDaysDiv.classList = "h-3/6 w-full flex flex-col justify-evenly items-center"
+        followingDaysDiv.id = "followingDaysBottom"
     followingDaysDivTop.classList = "h3/6 w-full flex flex-row justify-around items-center"
     followingDaysDivBottom.classList = "h3/6 w-full flex flex-row justify-evenly items-center"
 
@@ -1653,40 +1653,54 @@ function showFollowingDaysWeather(followingDaysData){
 }
 
 
+// -----------------------Fetching 10 days data ---------------------------------------------
+// Because of api provider, can not access the 10 days data
 
+// let locationKey2 = 318290
+
+
+function fetchFiveDays(){
+    fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}&details=true&metric=true`)
+    .then(resp => resp.json())
+    .then(json => {
+        showFollowingDaysWeather(json)
+
+        document.querySelector('#singleTop').remove()
+
+    })
+}
 
 
 
 // --------------------------------------------------------------------------
-
 
 // --------------------------------------------------------------------------
 
 //this will be deleted when project is done
-const myObj =
-{
-    "LocalObservationDateTime": "2022-11-30T10:48:00+03:00",
-    "EpochTime": 1669794480,
-    "WeatherText": "Mostly cloudy",
-    "WeatherIcon": 25,
-    "HasPrecipitation": false,
-    "PrecipitationType": null,
-    "IsDayTime": true,
-    "Temperature": {
-        "Metric": {
-            "Value": 15.7,
-            "Unit": "C",
-            "UnitType": 17
-        },
-        "Imperial": {
-            "Value": 60,
-            "Unit": "F",
-            "UnitType": 18
-        }
-    },
-    "MobileLink": "http://www.accuweather.com/en/tr/izmir/318290/current-weather/318290?lang=en-us",
-    "Link": "http://www.accuweather.com/en/tr/izmir/318290/current-weather/318290?lang=en-us"
-}
+// const myObj =
+// {
+//     "LocalObservationDateTime": "2022-11-30T10:48:00+03:00",
+//     "EpochTime": 1669794480,
+//     "WeatherText": "Mostly cloudy",
+//     "WeatherIcon": 25,
+//     "HasPrecipitation": false,
+//     "PrecipitationType": null,
+//     "IsDayTime": true,
+//     "Temperature": {
+//         "Metric": {
+//             "Value": 15.7,
+//             "Unit": "C",
+//             "UnitType": 17
+//         },
+//         "Imperial": {
+//             "Value": 60,
+//             "Unit": "F",
+//             "UnitType": 18
+//         }
+//     },
+//     "MobileLink": "http://www.accuweather.com/en/tr/izmir/318290/current-weather/318290?lang=en-us",
+//     "Link": "http://www.accuweather.com/en/tr/izmir/318290/current-weather/318290?lang=en-us"
+// }
 
 // ----------------------BUTTONS----------------------------------
 
@@ -1695,16 +1709,55 @@ detailsBtn.addEventListener('click', e => {
     e.preventDefault()
 
     if(detailsBtn.textContent !== "X"){
-        selectionBar.style.display = 'flex'
+        selectionBar.classList = "w-full flex flex-row justify-around items-center nav-button-color h-8 visible"
 
         detailsBtn.textContent = "X"
         detailsBtn.classList = "flex flex-col justify-center items-center nav-text-color mb-1 font-bold underline underline-offset-2 hover:cursor-n-resize"
     }else{
-        selectionBar.style.display = 'none'
+        selectionBar.classList = "w-full flex flex-row justify-around items-center nav-button-color h-8 hidden"
         detailsBtn.innerHTML = '<svg class="fill-current w-4 h-4 hover:cursor-s-resize" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>'
     }
     
 })
+
+fiveDaysBtn.addEventListener('click', e => {
+    e.preventDefault()
+
+    document.querySelector('#singleTop').remove()
+    document.querySelector('#followingDaysBottom').remove()
+
+        fetchFiveDays()
+    
+
+})
+
+todayBtn.addEventListener('click', e => {
+    e.preventDefault()
+
+    fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${cityName}&details=true`)
+    .then(resp => resp.json())
+    .then(json => {
+
+
+
+        
+        const locationKey = json[0].Key
+        const countryNameEnglish = json[0].Country.EnglishName
+        const cityNameEnglish = json[0].EnglishName
+    
+        cityNameSpan.textContent = `${cityNameEnglish}, ${countryNameEnglish}`
+        console.log(locationKey)
+    
+    
+        return cityName
+    })
+    .then(cityName => {
+        fetchCurrentWeather(cityName)
+    
+    })
+    
+})
+
 
 // --------------------------------------------------------------------------
 //For new searches
@@ -1714,8 +1767,16 @@ submitBtn.addEventListener('click', (e) => {
     detailsBtn.style.display = 'none'
     selectionBar.style.display = 'flex'
 
-    const writenCityName = searchBar.value
-        cityName = writenCityName.toLowerCase()
+    const writtenCityName = searchBar.value
+        cityName = writtenCityName.toLowerCase()
+
+    if(cityName === "izmir"){
+        mainBody.classList = "h-full flex flex-col items-center justify-center bg-[url('./images/izmir.jpeg')] opacity-90"
+    }else if(cityName === "ankara"){
+        mainBody.classList = "h-full flex flex-col items-center justify-center bg-[url('./images/ankara.webp')] opacity-90"
+    }else{
+        mainBody.classList = "h-full flex flex-col items-center justify-center bg-[url('./images/istanbul.jpeg')] opacity-90"
+    }
 
     searchBar.value = ""
 
@@ -1723,7 +1784,7 @@ fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${ap
 .then(resp => resp.json())
 .then(json => {
 
-    console.log("now =>" +json)
+
 
     const locationKey = json[0].Key
     const countryNameEnglish = json[0].Country.EnglishName
@@ -1744,9 +1805,9 @@ fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${ap
 // -----------------------BUTTONS END-------------------------------------------
 
 window.addEventListener("DOMContentLoaded", (e) => {
-      showCurrentWeather(myObj)
+      //showCurrentWeather(myObj)
 
-    //fetchCurrentWeather(cityName)
+    fetchCurrentWeather(cityName)
     
 })
 
