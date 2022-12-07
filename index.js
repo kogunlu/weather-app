@@ -1,5 +1,5 @@
-const apiKey = '1VdEXvl3YsOlGL9l9UejzXOD5OmZZvYv'
-// const apiKeyYedek = '8jbLGyvGrkbeiQ33FP9Qd1GFkdNjus2E'
+const apiKey = '8jbLGyvGrkbeiQ33FP9Qd1GFkdNjus2E'
+// const apiKeyYedek = '1VdEXvl3YsOlGL9l9UejzXOD5OmZZvYv'
 const searchBar = document.querySelector('#search-bar')
 const submitBtn = document.querySelector('#submitBtn')
 const cityNameSpan = document.querySelector('#city-name-span')
