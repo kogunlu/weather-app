@@ -119,7 +119,7 @@ function findRelatedIcon(number){
 //Fetching current weather for given city
 
 function fetchCurrentWeather(cityName){
-    fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${cityName}&details=true`)
+    fetch(`https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${cityName}&details=true`)
 .then(resp => resp.json())
 .then(json => {
 
@@ -133,7 +133,7 @@ function fetchCurrentWeather(cityName){
     return locationKey
 
 }).then(locationKey => {
-    return (fetch(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${apiKey}`)
+    return (fetch(`https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${apiKey}`)
     .then(resp => resp.json())
     .then(json => {
         
@@ -235,8 +235,8 @@ function showCurrentWeather(data){
 //         "Category": "rain",
 //         "EndDate": "2022-12-01T19:00:00+03:00",
 //         "EndEpochDate": 1669910400,
-//         "MobileLink": "http://www.accuweather.com/en/tr/izmir/318290/daily-weather-forecast/318290?unit=c&lang=en-us",
-//         "Link": "http://www.accuweather.com/en/tr/izmir/318290/daily-weather-forecast/318290?unit=c&lang=en-us"
+//         "MobileLink": "https://www.accuweather.com/en/tr/izmir/318290/daily-weather-forecast/318290?unit=c&lang=en-us",
+//         "Link": "https://www.accuweather.com/en/tr/izmir/318290/daily-weather-forecast/318290?unit=c&lang=en-us"
 //     },
 //     "DailyForecasts": [
 //         {
