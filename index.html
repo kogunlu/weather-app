@@ -14,14 +14,14 @@
 </head>
 <body class="h-screen w-full flex flex-col bg-zinc-50">
 
-    <main class="h-5/6 w-full flex flex-col ">
+    <main class="h-full w-full flex flex-col ">
     <!-- Header -->
-<nav class="w-full flex flex-col items-center justify-center md:h-1.5/6 lg:h-0.5/6 lg:justify-start">
+<nav class="w-full flex flex-col items-center justify-center h-auto md:h-1.5/6 lg:h-0.5/6 lg:justify-start">
     <!-- Header-top -->
     <div class="w-full flex flex-col items-center justify-center lg:flex-row">
         <!-- Logo -->
         <div class="flex w-full flex-row items-center justify-center lg:w-3/12">
-            <img id="logo" src="/images/app-logo-removebg-preview.png" alt="app-logo" class="w-4/12 md:w-2/12 lg:w-3/12">
+            <img id="logo" src="/images/app-logo-removebg-preview.png" alt="app-logo" class="w-3/12 md:w-2/12 lg:w-3/12">
         <div class="flex items-center justify-center lg:w-9/12">
             <p class="font-bold first-line:uppercase first-line:tracking-widest
             first-letter:text-6xl lg:first-letter:text-5xl 2xl:first-letter:text-6xl first-letter:font-bold first-letter:mr-0 first-letter:float-left text-xl nav-text-color lg:text-sm 2xl:text-xl ">Weather-App <br><span id="city-name-span" class="nav-text-child font-medium underline underline-offset-2 lg:text-sm">Adana, Türkiye</span></p>
@@ -50,8 +50,8 @@
                 </button>
             </div>
             <div id="selectionBar" class="w-full flex flex-row justify-around items-center nav-button-color h-8 hidden lg:flex" >
-                <button class="pl-1 pr-1 hover:border-b-2 hover:border-b-slate-400 text-slate-300 focus:border-b-slate-200" id="today">Today</button>
-                <button class="pl-1 pr-1 hover:border-b-2 hover:border-b-slate-400 text-slate-300 focus:border-b-slate-200 " id="threeDays">Next 3 days</button>
+                <button class="pl-1 pr-1 hover:border-b-2 hover:border-b-slate-400 text-slate-300 focus:border-b-2" id="today">Today</button>
+                <button class="pl-1 pr-1 hover:border-b-2 hover:border-b-slate-400 text-slate-300 focus:border-b-2 " id="threeDays">Next 3 days</button>
             </div>
         </div>
         
@@ -69,7 +69,7 @@
     </main>
     
 
-    <footer class="w-full flex flex-col items-center gap-2 mt-5">
+    <footer class="h-auto w-full flex flex-col items-center gap-2 mt-5">
        
         <!-- Credit part -->
         <div class="flex flex-col w-5/6 items-center justify-center  md:flex-row md:w-full md:items-start

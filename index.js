@@ -9,7 +9,7 @@ const mainBody = document.querySelector('#main-body')
 const threeDaysBtn = document.querySelector('#threeDays')
 const todayBtn = document.querySelector('#today')
 
-//TODO => icon issue, onFocus Today/3days button 
+
 // For initial screen
 let selectedCity = 'istanbul'
 // --------------------------------------------------------------------------
@@ -18,43 +18,43 @@ function findRelatedIcon(number){
     let result
 
     switch (number) {
-        case 1:
+        case 1000:
             result = "pe-7w-sun"
         break;
 
-        case 2: case 3: case 4: case 5: case 6:
+        case 1003:
             result = "pe-7w-cloud-sun"
         break;   
 
-        case  7: case 8: case 38:
+        case 1006: case 1009:
             result = "pe-7w-cloud"
         break;
 
-        case 11:
+        case 1030: case 1147:
             result = "pe-7w-fog"
         break;   
 
-        case 12: case 18: case 19:
+        case 1063:
             result = "pe-7w-rain-alt"
         break;
 
-        case 13: case 14:
+        case 1063:
             result = "pe-7w-rain-sun"
         break;   
 
-        case  20: case 21:
+        case  1150: case 1153: case 1180: case 1183: case 1186: case 1189:
             result = "pe-7w-rain-sun"
         break;   
          
-        case 16: case 17:
+        case 1261: case 1264:  
             result = "pe-7w-lightning-rain-sun"
         break;
 
-        case 22: case 24:
+        case 22: case 24: case 1168: case 1171:
             result = "pe-7w-snow-alt"
         break;  
 
-        case 23:
+        case 1066: case 1069: case 1072:
             result = "pe-7w-snow-alt-sun"
         break;
 
@@ -90,15 +90,15 @@ function findRelatedIcon(number){
             result = "pe-7w-cloud-sun"
         break;
 
-        case 39: case 40:
+        case 1240: case 1252:
             result = "pe-7w-rain-alt"
         break;   
 
-        case 41: case 42: case 43:
+        case 1087: case 1192: case 1195: case 1198: case 1201: case 1243: case 1246: case 1273: case 1276: 
             result = "pe-7w-lightning-rain"
         break;
 
-        case 44:
+        case 1114: case 1117: case 1204: case 1207: case 1210: case 1213: case 1216: case 1219: case 1222: case 1225: case 1237: case 1255: case 1258: case 1279: case 1282:
             result = "pe-7w-snow-alt"
         break;   
         
@@ -123,7 +123,7 @@ async function fetchCurrentWeather(selectedCity='istanbul'){
     
     const resp = await fetch(`https://weatherapi-com.p.rapidapi.com/current.json?q=${selectedCity}`, options)
     const json = await resp.json()
-        console.log(json)
+
 
     const countryNameEnglish = await json.location.country
     const cityNameEnglish = await json.location.name
@@ -144,8 +144,8 @@ async function fetchCurrentWeather(selectedCity='istanbul'){
 // Rendering coming data for current status
  async function showCurrentWeather(data){
 
-   //const selectedIcon = findRelatedIcon(data.WeatherIcon)
-   const selectedIcon = ""  // => data.condition daki key value ları incele. code = 1003 diger kodlar?
+   const selectedIcon = findRelatedIcon(data.current.condition.code)
+   
 
 
     if(mainDiv.innerHTML !== ""){
@@ -241,6 +241,7 @@ const optionsFollowing = {
 function showFollowingDaysWeather(followingDaysData){
     const data = followingDaysData.forecast.forecastday
 
+
     const cardDiv = document.querySelector("#singleDayCard")
 
 
@@ -305,8 +306,8 @@ function showFollowingDaysWeather(followingDaysData){
         followingDaySpan.appendChild(followingDayDate)
 
         //will review later icon
-        //const selectedIcon = findRelatedIcon(data[i].Day.Icon)
-        const selectedIcon = ""
+        const selectedIcon = findRelatedIcon(data[i].day.condition.code)
+
         
 
         const followingDayImg = document.createElement('i')
