@@ -125,32 +125,11 @@ async function fetchCurrentWeather(selectedCity='istanbul'){
     const json = await resp.json()
         console.log(json)
 
-<<<<<<< Updated upstream
-function fetchCurrentWeather(cityName){
-    fetch(`https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${cityName}&details=true`)
-.then(resp => resp.json())
-.then(json => {
-
-    locationKey = json[0].Key
-    const countryNameEnglish = json[0].Country.EnglishName
-    const cityNameEnglish = json[0].EnglishName
-
-    cityNameSpan.textContent = `${cityNameEnglish}, ${countryNameEnglish}`
-
-    console.log("location key => " + locationKey)
-    return locationKey
-
-}).then(locationKey => {
-    return (fetch(`https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${apiKey}`)
-    .then(resp => resp.json())
-    .then(json => {
-=======
     const countryNameEnglish = await json.location.country
     const cityNameEnglish = await json.location.name
 
     cityNameSpan.textContent = `${cityNameEnglish}, ${countryNameEnglish}`
     
->>>>>>> Stashed changes
         
     cityNameSpan.textContent = `${cityNameEnglish}, ${countryNameEnglish}`
     
@@ -159,13 +138,7 @@ function fetchCurrentWeather(cityName){
 }
 
 
-        return locationKey
-    })
-)}
-).then(locationKey => {
-    return (fetchFollowingDaysWeather(locationKey))
-})
-}
+
 
 // --------------------------------------------------------------------------
 // Rendering coming data for current status
@@ -244,15 +217,6 @@ function fetchCurrentWeather(cityName){
 }           
 // --------------------------------------------------------------------------
 
-<<<<<<< Updated upstream
-function fetchFollowingDaysWeather(locationKey){
-    fetch(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}&details=true&metric=true`)
-    .then(resp => resp.json())
-    .then(json => {
-
-        showFollowingDaysWeather(json)
-    })
-=======
 
 async function fetchFollowingDaysWeather(selectedCity){
     
@@ -269,7 +233,6 @@ const optionsFollowing = {
     const json = await resp.json()
     return json
 
->>>>>>> Stashed changes
 }
     
 
@@ -391,16 +354,8 @@ async function fetchThreeDays(selectedCity = "istanbul"){
 
     const resp = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${selectedCity}&days=3`, optionsFollowing)
 
-<<<<<<< Updated upstream
-function fetchFiveDays(){
-    fetch(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}&details=true&metric=true`)
-    .then(resp => resp.json())
-    .then(json => {
-        showFollowingDaysWeather(json)
-=======
     const json = await resp.json()
     return json
->>>>>>> Stashed changes
 
 
 }
