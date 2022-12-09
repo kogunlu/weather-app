@@ -6,6 +6,6 @@ Used technologies: HTML, CSS(tailwind), Vanilla JS
 
 # screenshots
 
-![Ekran Resmi 2022-12-05 20 06 07](https://user-images.githubusercontent.com/101986399/205698748-3a531337-31b0-481e-aba3-3c24690e53f7.png)
-![Ekran Resmi 2022-12-05 20 06 22](https://user-images.githubusercontent.com/101986399/205698770-1b7620bc-c6f8-4185-8a93-b4238f09acb8.png)
-![Ekran Resmi 2022-12-05 20 06 37](https://user-images.githubusercontent.com/101986399/205698786-6e1efbc7-98d7-4ade-8c75-eb2d00a8c713.png)
+![Ekran Resmi 2022-12-09 11 21 47](https://user-images.githubusercontent.com/101986399/206657456-2d49968b-8c9c-4a0b-b93a-99a1b8846f17.png)
+![Ekran Resmi 2022-12-09 11 21 54](https://user-images.githubusercontent.com/101986399/206657468-7508d17a-78d6-4a0f-b254-f498ff032e81.png)
+![Ekran Resmi 2022-12-09 11 22 01](https://user-images.githubusercontent.com/101986399/206657479-fc3c8c99-8bb7-4f7e-a2a6-298d24678dca.png)
