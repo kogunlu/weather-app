@@ -1,5 +1,3 @@
-const apiKey = '8jbLGyvGrkbeiQ33FP9Qd1GFkdNjus2E'
-// const apiKeyYedek = '1VdEXvl3YsOlGL9l9UejzXOD5OmZZvYv'
 const searchBar = document.querySelector('#search-bar')
 const submitBtn = document.querySelector('#submitBtn')
 const cityNameSpan = document.querySelector('#city-name-span')
@@ -8,15 +6,12 @@ const detailsBtn = document.querySelector('#details-btn')
 const mainDiv = document.querySelector('#main-div-1')
 const logo = document.querySelector('#logo')
 const mainBody = document.querySelector('#main-body')
-const fiveDaysBtn = document.querySelector('#fiveDays')
+const threeDaysBtn = document.querySelector('#threeDays')
 const todayBtn = document.querySelector('#today')
 
-
+//TODO => icon issue, onFocus Today/3days button 
 // For initial screen
-let cityName = 'istanbul'
-let locationKey
-let data 
-
+let selectedCity = 'istanbul'
 // --------------------------------------------------------------------------
 
 function findRelatedIcon(number){
@@ -117,7 +112,20 @@ function findRelatedIcon(number){
 
 // --------------------------------------------------------------------------
 //Fetching current weather for given city
+async function fetchCurrentWeather(selectedCity='istanbul'){
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': 'befdda097fmsh5166c116454dc48p13e7aejsn9099d5daf525',
+            'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+        }
+    };
+    
+    const resp = await fetch(`https://weatherapi-com.p.rapidapi.com/current.json?q=${selectedCity}`, options)
+    const json = await resp.json()
+        console.log(json)
 
+<<<<<<< Updated upstream
 function fetchCurrentWeather(cityName){
     fetch(`https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${cityName}&details=true`)
 .then(resp => resp.json())
@@ -136,9 +144,20 @@ function fetchCurrentWeather(cityName){
     return (fetch(`https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${apiKey}`)
     .then(resp => resp.json())
     .then(json => {
+=======
+    const countryNameEnglish = await json.location.country
+    const cityNameEnglish = await json.location.name
+
+    cityNameSpan.textContent = `${cityNameEnglish}, ${countryNameEnglish}`
+    
+>>>>>>> Stashed changes
         
-        data = json[0]
-        showCurrentWeather(data)
+    cityNameSpan.textContent = `${cityNameEnglish}, ${countryNameEnglish}`
+    
+        
+    return json
+}
+
 
         return locationKey
     })
@@ -150,9 +169,10 @@ function fetchCurrentWeather(cityName){
 
 // --------------------------------------------------------------------------
 // Rendering coming data for current status
-function showCurrentWeather(data){
-    
-   const selectedIcon = findRelatedIcon(data.WeatherIcon)
+ async function showCurrentWeather(data){
+
+   //const selectedIcon = findRelatedIcon(data.WeatherIcon)
+   const selectedIcon = ""  // => data.condition daki key value ları incele. code = 1003 diger kodlar?
 
 
     if(mainDiv.innerHTML !== ""){
@@ -186,18 +206,18 @@ function showCurrentWeather(data){
         singleCardTime.style.fontSize = "1em"
             timeDiv.appendChild(singleCardTime)        
 
-
+            //this img part will be reviewed
         const singleCardImg = document.createElement('i')
             singleCardImg.classList = `${selectedIcon} pe-5x`
                 statusDiv.appendChild(singleCardImg)
     
     const singleCardText = document.createElement('p')
-        singleCardText.textContent = `${data.WeatherText}`
+        singleCardText.textContent = `${data.current.condition.text}`
             statusDiv.appendChild(singleCardText)
 
     const singleCardTempature = document.createElement('p')
-        const weatherValue = Math.round(data.Temperature.Metric.Value)
-            singleCardTempature.textContent = `${weatherValue} °${data.Temperature.Metric.Unit}`
+        const weatherValue = Math.round(data.current.temp_c)
+            singleCardTempature.textContent = `${weatherValue} °C`
                 statusDiv.appendChild(singleCardTempature)
 
 
@@ -222,7 +242,9 @@ function showCurrentWeather(data){
 
 
 }           
+// --------------------------------------------------------------------------
 
+<<<<<<< Updated upstream
 function fetchFollowingDaysWeather(locationKey){
     fetch(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}&details=true&metric=true`)
     .then(resp => resp.json())
@@ -230,31 +252,51 @@ function fetchFollowingDaysWeather(locationKey){
 
         showFollowingDaysWeather(json)
     })
+=======
+
+async function fetchFollowingDaysWeather(selectedCity){
+    
+const optionsFollowing = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'befdda097fmsh5166c116454dc48p13e7aejsn9099d5daf525',
+		'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+	}
+};
+
+    const resp = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${selectedCity}&days=3`, optionsFollowing)
+
+    const json = await resp.json()
+    return json
+
+>>>>>>> Stashed changes
 }
+    
 
 // --------------------------------------------------------------------------
     
 function showFollowingDaysWeather(followingDaysData){
-    const data = followingDaysData.DailyForecasts
+    const data = followingDaysData.forecast.forecastday
+
     const cardDiv = document.querySelector("#singleDayCard")
 
 
     const followingDaysDiv = document.createElement('div')
     const followingDaysTextDiv = document.createElement('div')
         const topText = document.createElement('p')
-        topText.textContent = "Following 5 days' weather"
+        topText.textContent = "Following 3 days' weather"
         followingDaysTextDiv.appendChild(topText)
 
         topText.classList = "text-center underline font-bold"
         followingDaysDiv.classList = "w-full flex justify-center items-center"
         
 
-    const followingDaysDivTop = document.createElement('div')
+
     const followingDaysDivBottom = document.createElement('div')
 
     
 
-    for(let i = 0; i < 5; i++){
+    for(let i = 0; i < 3; i++){
         const followingDaySpan = document.createElement('span')
 
         let todayAsObj = new Date();
@@ -299,7 +341,9 @@ function showFollowingDaysWeather(followingDaysData){
             followingDayDateDiv.classList = "w-full flex items-center justify-center"
         followingDaySpan.appendChild(followingDayDate)
 
-        const selectedIcon = findRelatedIcon(data[i].Day.Icon)
+        //will review later icon
+        //const selectedIcon = findRelatedIcon(data[i].Day.Icon)
+        const selectedIcon = ""
         
 
         const followingDayImg = document.createElement('i')
@@ -307,21 +351,17 @@ function showFollowingDaysWeather(followingDaysData){
                 followingDaySpan.appendChild(followingDayImg)
 
         const followingDayTemperature = document.createElement('p')
-        const weatherValue = Math.round(data[i].Temperature.Maximum.Value)
-        const weatherValueMin = Math.round(data[i].Temperature.Minimum.Value)
-            followingDayTemperature.textContent = `${weatherValue} °${data[i].Temperature.Maximum.Unit} / ${weatherValueMin} °${data[i].Temperature.Minimum.Unit} `
+        const weatherValue = Math.round(data[i].day.maxtemp_c)
+        const weatherValueMin = Math.round(data[i].day.mintemp_c)
+            followingDayTemperature.textContent = `${weatherValue} °C / ${weatherValueMin} °C`
             followingDayTemperature.classList = "font-semibold"
                 followingDaySpan.appendChild(followingDayTemperature)  
                 
                 followingDaySpan.classList = "flex flex-col items-center justify-center"    
 
-        if(i < 3){
-
-            followingDaysDivTop.appendChild(followingDaySpan)
-
-        }else{
+        
             followingDaysDivBottom.appendChild(followingDaySpan)
-        }
+        
 
     }            
 
@@ -329,64 +369,42 @@ function showFollowingDaysWeather(followingDaysData){
 
     followingDaysDiv.classList = "h-3/6 w-full flex flex-col justify-evenly items-center"
         followingDaysDiv.id = "followingDaysBottom"
-    followingDaysDivTop.classList = "h3/6 w-full flex flex-row justify-around items-center"
     followingDaysDivBottom.classList = "h3/6 w-full flex flex-row justify-evenly items-center"
 
     followingDaysDiv.appendChild(followingDaysTextDiv)
-    followingDaysDiv.appendChild(followingDaysDivTop)
     followingDaysDiv.appendChild(followingDaysDivBottom)
     cardDiv.appendChild(followingDaysDiv)
 }
 
 
-// -----------------------Fetching 10 days data ---------------------------------------------
-// Because of api provider, can not access the 10 days data
+// -----------------------Fetching next 3 days ---------------------------------------------
 
-// let locationKey2 = 318290
+async function fetchThreeDays(selectedCity = "istanbul"){
+    
+    const optionsFollowing = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'befdda097fmsh5166c116454dc48p13e7aejsn9099d5daf525',
+		'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+	}
+    };
 
+    const resp = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${selectedCity}&days=3`, optionsFollowing)
 
+<<<<<<< Updated upstream
 function fetchFiveDays(){
     fetch(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}&details=true&metric=true`)
     .then(resp => resp.json())
     .then(json => {
         showFollowingDaysWeather(json)
+=======
+    const json = await resp.json()
+    return json
+>>>>>>> Stashed changes
 
-        document.querySelector('#singleTop').remove()
 
-    })
 }
 
-
-
-// --------------------------------------------------------------------------
-
-// --------------------------------------------------------------------------
-
-//this will be deleted when project is done
-// const myObj =
-// {
-//     "LocalObservationDateTime": "2022-11-30T10:48:00+03:00",
-//     "EpochTime": 1669794480,
-//     "WeatherText": "Mostly cloudy",
-//     "WeatherIcon": 25,
-//     "HasPrecipitation": false,
-//     "PrecipitationType": null,
-//     "IsDayTime": true,
-//     "Temperature": {
-//         "Metric": {
-//             "Value": 15.7,
-//             "Unit": "C",
-//             "UnitType": 17
-//         },
-//         "Imperial": {
-//             "Value": 60,
-//             "Unit": "F",
-//             "UnitType": 18
-//         }
-//     },
-//     "MobileLink": "http://www.accuweather.com/en/tr/izmir/318290/current-weather/318290?lang=en-us",
-//     "Link": "http://www.accuweather.com/en/tr/izmir/318290/current-weather/318290?lang=en-us"
-// }
 
 // ----------------------BUTTONS----------------------------------
 
@@ -406,13 +424,10 @@ detailsBtn.addEventListener('click', e => {
     
 })
 
-fiveDaysBtn.addEventListener('click', e => {
+threeDaysBtn.addEventListener('click', e => {
     e.preventDefault()
 
     document.querySelector('#singleTop').remove()
-    document.querySelector('#followingDaysBottom').remove()
-
-        fetchFiveDays()
     
 
 })
@@ -420,27 +435,8 @@ fiveDaysBtn.addEventListener('click', e => {
 todayBtn.addEventListener('click', e => {
     e.preventDefault()
 
-    fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${cityName}&details=true`)
-    .then(resp => resp.json())
-    .then(json => {
-
-
-
-        
-        const locationKey = json[0].Key
-        const countryNameEnglish = json[0].Country.EnglishName
-        const cityNameEnglish = json[0].EnglishName
-    
-        cityNameSpan.textContent = `${cityNameEnglish}, ${countryNameEnglish}`
-        console.log(locationKey)
-    
-    
-        return cityName
-    })
-    .then(cityName => {
-        fetchCurrentWeather(cityName)
-    
-    })
+    fetchCurrentWeather(selectedCity).then(json => showCurrentWeather(json))
+    fetchFollowingDaysWeather(selectedCity).then(json => showFollowingDaysWeather(json))
     
 })
 
@@ -454,11 +450,11 @@ submitBtn.addEventListener('click', (e) => {
     selectionBar.style.display = 'flex'
 
     const writtenCityName = searchBar.value
-        cityName = writtenCityName.toLowerCase()
+        selectedCity = writtenCityName.toLowerCase()
 
-    if(cityName === "izmir"){
+    if(selectedCity === "izmir"){
         mainBody.classList = "h-full flex flex-col items-center justify-center bg-[url('./images/izmir.jpeg')] opacity-90"
-    }else if(cityName === "ankara"){
+    }else if(selectedCity === "ankara"){
         mainBody.classList = "h-full flex flex-col items-center justify-center bg-[url('./images/ankara.webp')] opacity-90"
     }else{
         mainBody.classList = "h-full flex flex-col items-center justify-center bg-[url('./images/istanbul.jpeg')] opacity-90"
@@ -466,34 +462,16 @@ submitBtn.addEventListener('click', (e) => {
 
     searchBar.value = ""
 
-fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${cityName}&details=true`)
-.then(resp => resp.json())
-.then(json => {
-
-
-
-    const locationKey = json[0].Key
-    const countryNameEnglish = json[0].Country.EnglishName
-    const cityNameEnglish = json[0].EnglishName
-
-    cityNameSpan.textContent = `${cityNameEnglish}, ${countryNameEnglish}`
-    console.log(locationKey)
-
-
-    return cityName
-})
-.then(cityName => {
-    fetchCurrentWeather(cityName)
-
-})
+    fetchCurrentWeather(selectedCity).then(json => showCurrentWeather(json))
+    fetchFollowingDaysWeather(selectedCity).then(json => showFollowingDaysWeather(json))
 
 })
 // -----------------------BUTTONS END-------------------------------------------
 
 window.addEventListener("DOMContentLoaded", (e) => {
-      //showCurrentWeather(myObj)
 
-    fetchCurrentWeather(cityName)
+    fetchCurrentWeather(selectedCity).then(json => showCurrentWeather(json))
+    fetchFollowingDaysWeather(selectedCity).then(json => showFollowingDaysWeather(json))
     
 })
 
