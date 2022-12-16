@@ -166,7 +166,7 @@ async function fetchCurrentWeather(selectedCity='istanbul'){
 
     const singleCardDivTop = document.createElement('div')
         singleCardDivTop.id = "singleTop"
-        singleCardDivTop.classList = "h-3/6 w-full flex flex-col justify-evenly items-center mb-5"    
+        singleCardDivTop.classList = "h-3/6 w-full flex flex-col justify-evenly items-center"    
 
     const singleCardDate = document.createElement('p')
         singleCardDate.textContent = `${month}.${day}.${year}`
