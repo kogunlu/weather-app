@@ -166,7 +166,7 @@ async function fetchCurrentWeather(selectedCity='istanbul'){
 
     const singleCardDivTop = document.createElement('div')
         singleCardDivTop.id = "singleTop"
-        singleCardDivTop.classList = "h-3/6 w-full flex flex-col justify-start items-center"    
+        singleCardDivTop.classList = "h-3/6 w-full flex flex-col justify-evenly items-center"    
 
     const singleCardDate = document.createElement('p')
         singleCardDate.textContent = `${month}.${day}.${year}`
@@ -181,7 +181,7 @@ async function fetchCurrentWeather(selectedCity='istanbul'){
 
             //this img part will be reviewed
         const singleCardImg = document.createElement('i')
-            singleCardImg.classList = `${selectedIcon} pe-5x`
+            singleCardImg.classList = `${selectedIcon} pe-4x`
                 statusDiv.appendChild(singleCardImg)
     
     const singleCardText = document.createElement('p')
