@@ -181,7 +181,7 @@ async function fetchCurrentWeather(selectedCity='istanbul'){
 
             //this img part will be reviewed
         const singleCardImg = document.createElement('i')
-            singleCardImg.classList = `${selectedIcon} pe-4x`
+            singleCardImg.classList = `${selectedIcon} pe-5x`
                 statusDiv.appendChild(singleCardImg)
     
     const singleCardText = document.createElement('p')
