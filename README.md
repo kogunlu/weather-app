@@ -1,6 +1,6 @@
 # weather-app
 
-In this project, I've created my own weather-app by using AccuWeather API.
+In this project, I've created my own weather-app by using weather API.
 
 Used technologies: HTML, CSS(tailwind), Vanilla JS
 
