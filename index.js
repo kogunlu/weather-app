@@ -409,11 +409,11 @@ submitBtn.addEventListener('click', (e) => {
         selectedCity = writtenCityName.toLowerCase()
 
     if(selectedCity === "izmir"){
-        mainBody.classList = "h-full flex flex-col items-center justify-center bg-[url('./images/izmir.jpeg')] opacity-90"
+        mainBody.classList = "h-screen flex flex-col items-center justify-center bg-[url('./images/izmir.jpeg')] opacity-90"
     }else if(selectedCity === "ankara"){
-        mainBody.classList = "h-full flex flex-col items-center justify-center bg-[url('./images/ankara.webp')] opacity-90"
+        mainBody.classList = "h-screen flex flex-col items-center justify-center bg-[url('./images/ankara.webp')] opacity-90"
     }else{
-        mainBody.classList = "h-full flex flex-col items-center justify-center bg-[url('./images/istanbul.jpeg')] opacity-90"
+        mainBody.classList = "h-screen flex flex-col items-center justify-center bg-[url('./images/istanbul.jpeg')] opacity-90"
     }
 
     searchBar.value = ""
